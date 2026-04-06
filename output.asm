@@ -17,39 +17,16 @@ main:
 
     movl    $5, %eax
     movl    %eax, -4(%ebp)
-    movl    -4(%ebp), %eax
-    movl    %eax, -8(%ebp)
     movl    $3, %eax
+    movl    %eax, -8(%ebp)
+    movl    $300, %eax
     movl    %eax, -12(%ebp)
-    movl    -12(%ebp), %eax
+    movl    $11, %eax
     movl    %eax, -16(%ebp)
-    movl    $2, %eax
-    movl    %eax, -20(%ebp)
-    movl    -16(%ebp), %eax
-    movl    %eax, %ebx
-    movl    -20(%ebp), %eax
-    imull   %ebx, %eax
-    movl    %eax, -24(%ebp)
-    movl    -8(%ebp), %eax
-    movl    %eax, %ebx
-    movl    -24(%ebp), %eax
-    addl    %ebx, %eax
-    movl    %eax, -28(%ebp)
-    movl    -28(%ebp), %eax
-    movl    %eax, -32(%ebp)
-    movl    $10, %eax
-    movl    %eax, -36(%ebp)
-    movl    -32(%ebp), %eax
-    movl    %eax, %ebx
-    movl    -36(%ebp), %eax
-    cmpl    %eax, %ebx
-    setg  %al
-    movzbl  %al, %eax
-    movl    %eax, -40(%ebp)
-    movl    -40(%ebp), %eax
+    movl    $1, %eax
     cmpl    $0, %eax
     je      L0
-    movl    -32(%ebp), %eax
+    movl    $11, %eax
     pushl   %eax
     pushl   $fmt_int
     call    printf
@@ -57,32 +34,16 @@ main:
     jmp     L1
 L0:
     movl    $0, %eax
-    movl    %eax, -44(%ebp)
-    movl    -44(%ebp), %eax
-    movl    %eax, -48(%ebp)
+    movl    %eax, -20(%ebp)
 L2:
-    movl    -48(%ebp), %eax
-    movl    %eax, %ebx
-    movl    -32(%ebp), %eax
-    cmpl    %eax, %ebx
-    setl  %al
-    movzbl  %al, %eax
-    movl    %eax, -52(%ebp)
-    movl    -52(%ebp), %eax
+    movl    $1, %eax
     cmpl    $0, %eax
     je      L3
     movl    $1, %eax
-    movl    %eax, -56(%ebp)
-    movl    -48(%ebp), %eax
-    movl    %eax, %ebx
-    movl    -56(%ebp), %eax
-    addl    %ebx, %eax
-    movl    %eax, -60(%ebp)
-    movl    -60(%ebp), %eax
-    movl    %eax, -48(%ebp)
+    movl    %eax, -20(%ebp)
     jmp     L2
 L3:
-    movl    -48(%ebp), %eax
+    movl    $1, %eax
     pushl   %eax
     pushl   $fmt_int
     call    printf
