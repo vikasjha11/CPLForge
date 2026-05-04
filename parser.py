@@ -34,7 +34,11 @@ from lexer import (
     TT_LPAREN, TT_RPAREN, TT_LBRACE, TT_RBRACE,
     TT_LBRACKET, TT_RBRACKET, TT_SEMICOLON, TT_COMMA,
 )
+<<<<<<< HEAD
 from cpl_ast import (
+=======
+from ast import (
+>>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
     Program, VarDecl, Assignment, IfStatement, WhileStatement,
     ReturnStatement, PrintStatement, InputStatement, ExpressionStatement,
     BinaryOp, UnaryOp, Literal, Identifier, ArrayAccess,

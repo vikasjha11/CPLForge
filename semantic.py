@@ -17,7 +17,11 @@
 # We implement this with a STACK of symbol tables.
 # Enter block → push new table. Exit block → pop it.
 
+<<<<<<< HEAD
 from cpl_ast import (
+=======
+from ast import (
+>>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
     Program, VarDecl, Assignment, IfStatement, WhileStatement,
     ReturnStatement, PrintStatement, InputStatement, ExpressionStatement,
     BinaryOp, UnaryOp, Literal, Identifier, ArrayAccess,
