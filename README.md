@@ -17,8 +17,19 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 
 </div>
----
 
+## Quick Links
+
+- [What is CPL Compiler?](#what-is-cpl)
+- [Setup](#setup)
+- [T Diagram](#compiler-bootstrapping-process-diagram)
+- [How to use](#how-to-use)
+- [Where cross-compilation](#where-cross-compilation)
+- [Screenshots](#screenshots-of-projects)
+- [app.py](app.py)
+- [cplc.py](cplc.py)
+
+<a id="what-is-cpl"></a>
 ## ✨ What is CPL Compiler?(CPL=Custom Programming Lang.)
 
 **CPL Compiler** is a **6-stage cross compiler** built with Python and Flask. It takes CPL source code and walks it through the complete compilation pipeline — right in your browser.
@@ -26,38 +37,35 @@ It generates both **x86-style Assembly and C99** from the same source.
 
 ### 🔁 Compilation Pipeline
 
-<div align="center">
-
 ```
-Source Code
-     │
-     ▼
-┌──────────────┐
-│  1. Lexer    │  → Tokenizes source into typed tokens
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  2. Parser   │  → Builds Abstract Syntax Tree (AST)
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  3. Semantic │  → Type checking, scope & symbol resolution
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  4. IR Gen   │  → Generates Three-Address Code (TAC)
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  5. Optimizer│  → Dead code elimination & instruction reduction
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  6. Codegen  │  → Outputs x86 Assembly + C99 code
-└──────────────┘
+                                Source Code
+                                   │
+                                   ▼
+                            ┌──────────────┐
+                            │  1. Lexer    │  → Tokenizes source into typed tokens
+                            └──────┬───────┘
+                                   ▼
+                            ┌──────────────┐
+                            │  2. Parser   │  → Builds Abstract Syntax Tree (AST)
+                            └──────┬───────┘
+                                   ▼
+                            ┌──────────────┐
+                            │  3. Semantic │  → Type checking, scope & symbol resolution
+                            └──────┬───────┘
+                                   ▼
+                            ┌──────────────┐
+                            │  4. IR Gen   │  → Generates Three-Address Code (TAC)
+                            └──────┬───────┘
+                                   ▼
+                            ┌──────────────┐
+                            │  5. Optimizer│  → Dead code elimination & instruction reduction
+                            └──────┬───────┘
+                                   ▼
+                            ┌──────────────┐
+                            │  6. Codegen  │  → Outputs x86 Assembly + C99 code
+                            └──────────────┘
 ```
 
-</div>
 
 ## Setup
 
