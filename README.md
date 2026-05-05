@@ -1,13 +1,13 @@
 <div align="center">
 
-```
- ██████╗██████╗ ██╗            ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗██╗     ███████╗██████╗
-██╔════╝██╔══██╗██║           ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║██║     ██╔════╝██╔══██╗
-██║     ██████╔╝██║           ██║     ██║   ██║██╔████╔██║██████╔╝██║██║     █████╗  ██████╔╝
-██║     ██╔═══╝ ██║           ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║██║     ██╔══╝  ██╔══██╗
-╚██████╗██║     ███████╗      ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║███████╗███████╗██║  ██║
- ╚═════╝╚═╝     ╚══════╝       ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
-```
+              ```
+              ██████╗██████╗ ██╗            ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗██╗     ███████╗██████╗
+              ██╔════╝██╔══██╗██║           ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║██║     ██╔════╝██╔══██╗
+              ██║     ██████╔╝██║           ██║     ██║   ██║██╔████╔██║██████╔╝██║██║     █████╗  ██████╔╝
+              ██║     ██╔═══╝ ██║           ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║██║     ██╔══╝  ██╔══██╗
+              ╚██████╗██║     ███████╗      ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║███████╗███████╗██║  ██║
+              ╚═════╝╚═╝     ╚══════╝       ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
+              ```
 # CPL Cross Compiler
 
 ### A full-pipeline compiler for the CPL language — from source to x86 Assembly & C99
@@ -21,39 +21,43 @@
 
 ## ✨ What is CPL Compiler?(CPL=Custom Programming Lang.)
 
-CPL Compiler is a **6-stage cross compiler** built with Python and Flask. It takes CPL source code and walks it through the complete compilation pipeline — right in your browser.
-It generates both x86-style Assembly and C99 from the same source.
+**CPL Compiler** is a **6-stage cross compiler** built with Python and Flask. It takes CPL source code and walks it through the complete compilation pipeline — right in your browser.
+It generates both **x86-style Assembly and C99** from the same source.
 
 ### 🔁 Compilation Pipeline
 
+<div align="center">
+
 ```
-                Source Code
-                     │
-                     ▼
-              ┌──────────────┐
-              │  1. Lexer    │  → Tokenizes source into typed tokens
-              └──────┬───────┘
-                     ▼
-              ┌──────────────┐
-              │  2. Parser   │  → Builds Abstract Syntax Tree (AST)
-              └──────┬───────┘
-                     ▼
-              ┌──────────────┐
-              │  3. Semantic │  → Type checking, scope & symbol resolution
-              └──────┬───────┘
-                     ▼
-              ┌──────────────┐
-              │  4. IR Gen   │  → Generates Three-Address Code (TAC)
-              └──────┬───────┘
-                     ▼
-              ┌──────────────┐
-              │  5. Optimizer│  → Dead code elimination & instruction reduction
-              └──────┬───────┘
-                     ▼
-              ┌──────────────┐
-              │  6. Codegen  │  → Outputs x86 Assembly + C99 code
-              └──────────────┘
+Source Code
+     │
+     ▼
+┌──────────────┐
+│  1. Lexer    │  → Tokenizes source into typed tokens
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│  2. Parser   │  → Builds Abstract Syntax Tree (AST)
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│  3. Semantic │  → Type checking, scope & symbol resolution
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│  4. IR Gen   │  → Generates Three-Address Code (TAC)
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│  5. Optimizer│  → Dead code elimination & instruction reduction
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│  6. Codegen  │  → Outputs x86 Assembly + C99 code
+└──────────────┘
 ```
+
+</div>
 
 ## Setup
 
@@ -101,6 +105,20 @@ Then:
 1. Watch all 6 stages print in terminal.
 2. Verify final files generated in project root: output.asm and output.c.
 3. Use these outputs for verification on another machine.
+
+## Compiler bootstrapping process diagram
+
+The project also follows the idea of a T-diagram, where the compiler is shown as a translation tool from CPL source into target code.
+
+![Bootstrapping Flow](docs/screenshots/T-diagram.png)
+
+
+In this project:
+
+1. The host machine runs the compiler.
+2. The compiler translates CPL into x86 Assembly and C99.
+3. The generated C file can be moved to another machine and compiled there.
+4. This shows the cross-compilation pipeline clearly in T-diagram form.
 
 ## How to use
 
@@ -151,14 +169,13 @@ Notes:
 
 ## Screenshots of Projects
 
-1. `web-verification.png`
-2. `web-cross-proof.png`
-
-Then keep this section as-is:
-
 ### Web Ui
 
 ![Web UI](docs/screenshots/web-ui.png)
+
+### CLI Mode
+
+![CLI Mode](docs/screenshots/CLI-mode.png)
 
 ### Cross-machine proof steps
 
@@ -172,17 +189,4 @@ Then keep this section as-is:
 
 ![Generated output.c](docs/screenshots/output-c.png)
 
-## Project files
-
-- `app.py` - Flask web server
-- `cplc.py` - CLI pipeline runner
-- `lexer.py`, `parser.py`, `semantic.py`, `ir.py`, `optimizer.py`
-- `codegen.py`, `codegen_c.py`
-- `templates/index.html`
-
-## Tech
-
-- Python
-- Flask
-- Vanilla HTML/CSS/JS
 
