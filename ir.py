@@ -35,25 +35,17 @@
 
 from dataclasses import dataclass, field
 from typing import Optional, Any
-<<<<<<< HEAD
 from cpl_ast import (
-=======
-from ast import (
->>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
     Program, VarDecl, Assignment, IfStatement, WhileStatement,
     ReturnStatement, PrintStatement, InputStatement, ExpressionStatement,
     BinaryOp, UnaryOp, Literal, Identifier, ArrayAccess,
     FunctionCall, FunctionDecl, ASTNode,
 )
 
-<<<<<<< HEAD
-=======
-
 # ─────────────────────────────────────────────────────────
 #  TAC INSTRUCTION
 # ─────────────────────────────────────────────────────────
 
->>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
 @dataclass
 class TACInstruction:
     """

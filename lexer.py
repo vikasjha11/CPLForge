@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 # M1: Full lexer — tokenise CPL, define all token types (INT, ID, PLUS...)
 # M2: Extended lexer for new CPL keywords (string, array, print, input)
->>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
 
 import re
 

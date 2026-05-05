@@ -25,11 +25,8 @@
 #   Each function is a labeled block with a standard prologue/epilogue.
 
 from ir import TACInstruction
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
 class CodeGenerator:
     """
     Converts a list of TACInstruction objects into x86-like assembly text.

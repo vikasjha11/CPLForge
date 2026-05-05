@@ -117,6 +117,10 @@ def compile_code():
     t   = time.time()
     asm = CodeGenerator().generate(opt_tac)
     c   = CCodeGenerator().generate(opt_tac)
+    with open("output.asm", "w", encoding="utf-8") as f:
+        f.write(asm)
+    with open("output.c", "w", encoding="utf-8") as f:
+        f.write(c)
     ms  = round((time.time()-t)*1000, 1)
     stages["6"] = {"status":"success","summary":f"x86 + C99 generated · {ms}ms","asm":asm,"c_code":c}
 

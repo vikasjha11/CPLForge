@@ -204,11 +204,7 @@ def compile_cpl(source: str,
 # ── helpers ───────────────────────────────────────────────
 
 def _count_nodes(node) -> int:
-<<<<<<< HEAD
     from cpl_ast import ASTNode
-=======
-    from ast import ASTNode
->>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
     if not isinstance(node, ASTNode): return 0
     count = 1
     for v in node.__dict__.values():
@@ -219,11 +215,7 @@ def _count_nodes(node) -> int:
     return count
 
 def _print_ast_colored(node, indent=0):
-<<<<<<< HEAD
     from cpl_ast import ASTNode
-=======
-    from ast import ASTNode
->>>>>>> 35f1492d35f2c5706a6f1004b84e92afbfc194d2
     if not isinstance(node, ASTNode): return
     pad  = "  " * indent
     name = type(node).__name__

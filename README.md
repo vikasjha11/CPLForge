@@ -1,12 +1,12 @@
 <div align="center">
 
 ```
- ██████╗██████╗ ██╗      ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗██╗     ███████╗██████╗
-██╔════╝██╔══██╗██║     ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║██║     ██╔════╝██╔══██╗
-██║     ██████╔╝██║     ██║     ██║   ██║██╔████╔██║██████╔╝██║██║     █████╗  ██████╔╝
-██║     ██╔═══╝ ██║     ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║██║     ██╔══╝  ██╔══██╗
-╚██████╗██║     ███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║███████╗███████╗██║  ██║
- ╚═════╝╚═╝     ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
+ ██████╗██████╗ ██╗            ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗██╗     ███████╗██████╗
+██╔════╝██╔══██╗██║           ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║██║     ██╔════╝██╔══██╗
+██║     ██████╔╝██║           ██║     ██║   ██║██╔████╔██║██████╔╝██║██║     █████╗  ██████╔╝
+██║     ██╔═══╝ ██║           ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║██║     ██╔══╝  ██╔══██╗
+╚██████╗██║     ███████╗      ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║███████╗███████╗██║  ██║
+ ╚═════╝╚═╝     ╚══════╝       ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
 ```
 
 # CPL Cross Compiler
@@ -72,7 +72,7 @@ Verify: `python --version`
 ### Step 1 — Clone or Download the Project
 
 ```bash
-git clone https://github.com/your-username/cpl-compiler.git
+git clone https://github.com/vikasjha11/Cross_Compiler_Project.git
 cd cpl-compiler/CPL_Flask
 ```
 
@@ -166,18 +166,7 @@ Write CPL code in the browser editor and click **Compile**. The UI shows each pi
 
 > All compiler stages are written in **pure Python** — no external compiler tools required.
 
----
 
-## ⚠️ Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| `python` not found | Use `python3` instead |
-| Port 5000 in use | Edit `app.py` → change `port=5000` to another port |
-| Module not found | Run `pip install -r requirements.txt` |
-| Page doesn't load | Make sure you're at `http://localhost:5000` (not HTTPS) |
-
----
 
 ## 👨‍💻 Built With
 
@@ -186,9 +175,5 @@ Write CPL code in the browser editor and click **Compile**. The UI shows each pi
 - **Vanilla HTML/CSS/JS** — Zero frontend dependencies
 
 ---
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
 
 
