@@ -128,6 +128,47 @@ In this project:
 3. The generated C file can be moved to another machine and compiled there.
 4. This shows the cross-compilation pipeline clearly in T-diagram form.
 
+## Bootstrapping workflow
+
+### What is bootstrapping?
+
+Bootstrapping a compiler means using a simpler version of the compiler (or a host compiler) to compile a more advanced version of itself. This is a classic technique in compiler development that demonstrates the compiler can compile its own kind of code.
+
+### Bootstrap phases in this project
+
+**Phase 0 — Host compilation:**
+1. Run the Python-based CPL compiler on `bootstrap.cpl`.
+2. The compiler outputs `output.asm` (x86 assembly) and `output.c` (C99 source).
+3. Inspect the generated code to confirm it correctly represents the bootstrap seed logic.
+
+**Phase 1 — Native compilation:**
+1. Compile the generated `output.c` with your system C compiler (gcc or clang).
+2. This creates a native binary that can run independently.
+3. The C output is portable and can be moved to another machine.
+
+**Phase 2 — Self-hosting iteration:**
+1. Use the native compiler from Phase 1 to compile future CPL programs.
+2. Eventually, compile a CPL-written version of the compiler itself.
+3. Once the CPL compiler can compile itself, the project is fully self-hosted.
+
+### How to run the bootstrap workflow
+
+**Option A: Bootstrap mode (recommended for demo)**
+
+```bash
+python cplc.py --bootstrap
+```
+
+This runs Phase 0 automatically on `bootstrap.cpl`, shows all compilation stages, and prints the bootstrap narrative.
+
+**Option B: Compile any CPL file directly**
+
+```bash
+python cplc.py bootstrap.cpl --target both
+```
+
+This also generates both target outputs but without the bootstrap narrative.
+
 ## How to use
 
 ### Web UI

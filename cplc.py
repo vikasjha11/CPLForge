@@ -1,6 +1,7 @@
 # cplc.py — Extraordinary CPL Cross Compiler
 # Full 6-stage pipeline + symbol table + dual targets + rich errors
 
+import argparse
 import sys
 import os
 import time
@@ -34,7 +35,7 @@ def banner():
 {RESET}
 {BOLD}  Bootstrap-Enabled Cross Compiler for CPL (Custom Programming Language){RESET}
 {DIM}  Targets: x86 AT&T Assembly  |  C99
-  Phases:  Lexer → Parser → Semantic → TAC IR → Optimizer → Codegen{RESET}
+  Phases:  Lexer > Parser > Semantic > TAC IR > Optimizer > Codegen{RESET}
 """)
 
 def stage(n, name):
@@ -201,6 +202,20 @@ def compile_cpl(source: str,
     return results
 
 
+def load_source(path: str) -> str:
+    with open(path, 'r', encoding='utf-8') as f:
+        return f.read()
+
+
+def bootstrap_compiler(bootstrap_path: str, target: str = 'both'):
+    print(f"{CYAN}{BOLD}Bootstrap workflow{RESET}")
+    print(f"{DIM}Phase 0: host Python compiler compiles {bootstrap_path}{RESET}")
+    source = load_source(bootstrap_path)
+    compile_cpl(source, filename=bootstrap_path, target=target)
+    print(f"{DIM}Phase 1: compile the generated C output with gcc to produce a native compiler seed{RESET}")
+    print(f"{DIM}Phase 2: run the seed compiler on future CPL sources{RESET}")
+
+
 # ── helpers ───────────────────────────────────────────────
 
 def _count_nodes(node) -> int:
@@ -260,37 +275,68 @@ def _print_tac_colored(instructions):
 # ═══════════════════════════════════════════════════════════
 
 if __name__ == '__main__':
-    # This demo shows ALL features:
-    # - int, float, string types
-    # - if/else, while
-    # - arithmetic with operator precedence
-    # - constant folding opportunity (100 + 200)
-    # - dead variable (unused temp)
-    # - print, input
+    parser = argparse.ArgumentParser(description='CPL cross compiler and bootstrap driver')
+    parser.add_argument('source', nargs='?', help='Path to a .cpl source file to compile')
+    parser.add_argument('--target', choices=['asm', 'c', 'both'], default='both',
+                        help='Select which target outputs to generate')
+    parser.add_argument('--no-tokens', action='store_true', help='Hide token dump')
+    parser.add_argument('--no-ast', action='store_true', help='Hide AST dump')
+    parser.add_argument('--no-ir', action='store_true', help='Hide TAC dump')
+    parser.add_argument('--no-opt', action='store_true', help='Hide optimized TAC dump')
+    parser.add_argument('--no-symtable', action='store_true', help='Hide symbol table dump')
+    parser.add_argument('--bootstrap', action='store_true',
+                        help='Compile bootstrap.cpl and print the bootstrap phase narrative')
+    args = parser.parse_args()
 
-    sample = """
-    int a = 5;
-    int b = 3;
-    int folded = 100 + 200;
-    int result = a + b * 2;
+    if args.bootstrap:
+        bootstrap_path = os.path.join(os.path.dirname(__file__), 'bootstrap.cpl')
+        if not os.path.exists(bootstrap_path):
+            raise SystemExit(f'bootstrap file not found: {bootstrap_path}')
+        bootstrap_compiler(bootstrap_path, target=args.target)
+    elif args.source:
+        source = load_source(args.source)
+        compile_cpl(
+            source,
+            filename=args.source,
+            target=args.target,
+            show_tokens   = not args.no_tokens,
+            show_ast      = not args.no_ast,
+            show_ir       = not args.no_ir,
+            show_opt      = not args.no_opt,
+            show_symtable = not args.no_symtable,
+        )
+    else:
+        # This demo shows ALL features:
+        # - int, float, string types
+        # - if/else, while
+        # - arithmetic with operator precedence
+        # - constant folding opportunity (100 + 200)
+        # - dead variable (unused temp)
+        # - print, input
 
-    if (result > 10) {
-        print(result);
-    } else {
-        int x = 0;
-        while (x < result) {
-            x = x + 1;
+        sample = """
+        int a = 5;
+        int b = 3;
+        int folded = 100 + 200;
+        int result = a + b * 2;
+
+        if (result > 10) {
+            print(result);
+        } else {
+            int x = 0;
+            while (x < result) {
+                x = x + 1;
+            }
+            print(x);
         }
-        print(x);
-    }
-    """
+        """
 
-    compile_cpl(
-        sample,
-        show_tokens   = False,
-        show_ast      = True,
-        show_ir       = True,
-        show_opt      = True,
-        show_symtable = True,
-        target        = 'both',
-    )
+        compile_cpl(
+            sample,
+            show_tokens   = False,
+            show_ast      = True,
+            show_ir       = True,
+            show_opt      = True,
+            show_symtable = True,
+            target        = 'both',
+        )

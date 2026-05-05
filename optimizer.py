@@ -37,6 +37,11 @@ class Optimizer:
         result    = []
 
         for instr in instructions:
+            if self._is_barrier(instr):
+                const_map.clear()
+                result.append(instr)
+                continue
+
             if instr.op == 'ASSIGN':
                 if isinstance(instr.arg1, (int, float, bool)):
                     const_map[instr.result] = instr.arg1
@@ -79,6 +84,11 @@ class Optimizer:
         result    = []
 
         for instr in instructions:
+            if self._is_barrier(instr):
+                const_map.clear()
+                result.append(instr)
+                continue
+
             # Replace known constants in operands
             arg1 = const_map.get(instr.arg1, instr.arg1) if isinstance(instr.arg1, str) else instr.arg1
             arg2 = const_map.get(instr.arg2, instr.arg2) if isinstance(instr.arg2, str) else instr.arg2
@@ -108,6 +118,11 @@ class Optimizer:
         result   = []
 
         for instr in instructions:
+            if self._is_barrier(instr):
+                copy_map.clear()
+                result.append(instr)
+                continue
+
             # Resolve operands through copy chain
             arg1 = copy_map.get(instr.arg1, instr.arg1) if isinstance(instr.arg1, str) else instr.arg1
             arg2 = copy_map.get(instr.arg2, instr.arg2) if isinstance(instr.arg2, str) else instr.arg2
@@ -145,6 +160,9 @@ class Optimizer:
             if not is_dead:
                 result.append(instr)
         return result
+
+    def _is_barrier(self, instr):
+        return instr.op in ('LABEL', 'JUMP', 'JUMPIF', 'JUMPIFNOT', 'FUNC_BEGIN', 'FUNC_END', 'CALL')
 
     def _apply_op(self, op, l, r):
         try:
